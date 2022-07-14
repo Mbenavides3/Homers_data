@@ -1,0 +1,95 @@
+---
+title: "TheCLT"
+author: "Michelle Benavides"
+date: "July 13, 2022"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(tidyverse)
+require(lattice)
+```
+
+```{r}
+Homers_data <- read.csv(file="Homers_data.csv")
+my1000 <- sample(Homers_data$kkardashtemp ,size = 1000, replace=T)
+densityplot(my1000,main="original data")
+
+options(digits = 1)
+```
+
+
+#### Describe the resulting plot -  is it unimodal?  How many peaks does it have?  Are all the peaks the same size? 
+
+The resulting plot is bimodal since it has two peaks. The first peak seems to be slightly smaller than the second peak. The sample mean is `r mean(my1000)` and the standard deviation is `r sd(my1000)`.
+
+### Now take 2 random samples of 1000 points of the kkardashtemp variable and form 1000 points of their averages,
+
+```{r}
+numb = 2
+Hdata   <- sample(Homers_data$kkardashtemp ,size = numb*1000, replace=T)
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+densityplot(x.avg,main="sample size 2")
+```
+
+#### Describe the resulting plot -  is it unimodal?  How many peaks does it have?  Are all the peaks the same size? 
+
+The resulting plot seems to be tri-modal since it has three peaks. The middle of the three peaks seems to be significantly bigger than the outer two. The sample mean is `r mean(x.avg)` and the standard deviation is `r sd(x.avg)`.
+
+### Do this again for 4 random samples
+
+```{r}
+numb = 4
+Hdata   <- sample(Homers_data$kkardashtemp ,size = numb*1000, replace=T)
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+densityplot(x.avg,main="sample size 4")
+```
+
+The sample mean is `r mean(x.avg)` and the standard deviation is `r sd(x.avg)`.
+
+### Then again for 9 random samples
+
+```{r}
+numb = 9
+Hdata   <- sample(Homers_data$kkardashtemp ,size = numb*1000, replace=T)
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+densityplot(x.avg,main="sample size 9")
+```
+
+The sample mean is `r mean(x.avg)` and the standard deviation is `r sd(x.avg)`.
+
+### then 16 random samples
+
+```{r}
+numb = 16
+Hdata   <- sample(Homers_data$kkardashtemp ,size = numb*1000, replace=T)
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+densityplot(x.avg,main="sample size 16")
+```
+
+The sample mean is `r mean(x.avg)` and the standard deviation is `r sd(x.avg)`.
+
+### finally for 36 random samples.
+
+```{r}
+numb = 36
+Hdata   <- sample(Homers_data$kkardashtemp ,size = numb*1000, replace=T)
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+densityplot(x.avg,main="sample size 36")
+```
+
+The sample mean is `r mean(x.avg)` and the standard deviation is `r sd(x.avg)`.
+
+### Write a summary paragraph describing what you observed and how it relates to the central limit theorem.
+
+As I was going through the assignment, I observed that the bigger the sample of my data the more it resembles a normal distribution graph. In terms of the central limit theorem, we see that when you take bigger averages things start to look normal and the standard deviation actually shrinks according to the average by the square root of the size of the sample. 
+
+Be sure to comment on both the mean and standard deviation of the sample averages - the CLT makes a statement about what to expect from both.
